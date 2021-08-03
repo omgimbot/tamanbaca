@@ -1,0 +1,15 @@
+{
+    "name" : "Bram Krisna Danu",
+    "email" : "",
+    "password" : "",
+    "secret" : "SVA",
+    "database": {
+        "development": {
+            "uri": "mongodb://localhost:27017/tamanBaca_db"
+        },
+        "production": {
+            "uri": "mongodb://localhost:27017/tamanBaca_db"
+        }
+    }
+
+}
