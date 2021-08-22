@@ -5,10 +5,7 @@ const mongoSchema = mongoose.Schema({
 	noTelpon: String,
 	email: String,
 	password: String,
-	role: {
-		type: Number,
-		default: 2
-	},
+	role:  String,
 	created_at: {
 		type: Date,
 		default: new Date().toISOString()

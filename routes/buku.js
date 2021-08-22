@@ -2,7 +2,7 @@
 const auth = require("basic-auth")
 const jwt = require("jsonwebtoken")
 const multer = require("multer")
-const userController = require("../controller/user_controller")
+const controller = require("../controller/buku_controller")
 var config = require("../config/config.json")
 const fs = require("fs")
 const uploadUtil = require("../config/uploadImg")
@@ -10,6 +10,52 @@ const fotoUser = uploadUtil.upload.single("fotoProfile")
 
 module.exports = (router) => {
   router.get("/", (req, res) => res.end("Toko Api!"))
+
+
+
+  router.post("/buku/create", (req, res) => {
+    let data = req.body
+    controller
+      .create(req.body)
+      .then((result) => {
+        res.json(result)
+      })
+      .catch((err) => {
+        res.json(err)
+      });
+  });
+
+  router.get("/buku", (req, res) => {
+    controller
+      .getBuku()
+      .then((result) => {
+        res.json(result)
+      }).catch((err) => {
+        res.json(err)
+      })
+  })
+
+  router.delete("/buku/delete/:id", (req, res) => {
+    controller
+      .deleteBuku(req.params.id)
+      .then((result) => {
+        res.json(result)
+      }).catch((err) => {
+        res.json(err)
+      })
+  })
+
+  router.put("/buku/update/:id", (req, res) => {
+    console.log(req.body)
+    controller
+      .updateBuku(req.params.id , req.body)
+      .then((result) => {
+        res.json(result)
+      }).catch((err) => {
+        res.json(err)
+      })
+  })
+  
 
   router.post("/users/signin", (req, res) => {
     try {
@@ -30,31 +76,6 @@ module.exports = (router) => {
       console.log(err)
     }
   })
-
-
-  router.post("/users/signup", (req, res) => {
-    let data = req.body
-    console.log(data)
-    // data.fotoProfile = uploadUtil.cekNull(req.file)
-    // const userProfile = req.files['user_photo']
-    // if (userProfile !== undefined) {
-    // 	Object.assign(req.body, {
-    // 		user_photo: userProfile[0].filename
-    // 	})
-    // }
-    // console.log(nik,nama,no_hp,role,password,token,user_photo,ktp_photo,kk_photo)
-    userController
-      .registerUser(req.body)
-      .then((result) => {
-        // if (userProfile !== undefined) {
-        // 	ftp.sendToFtp(userProfile[0].path, 'user', userProfile[0].filename)
-        // }
-        res.json(result)
-      })
-      .catch((err) => {
-        res.json(err)
-      });
-  });
 
   router.put("/users/updateprofile/:id", fotoUser, (req, res) => {
     let id = req.params.id
