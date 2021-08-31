@@ -2,15 +2,13 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const ObjectId = mongoose.Types.ObjectId
 const mongoSchema = mongoose.Schema({
-  nama: String,
-  idUser : ObjectId , 
-  judul: String,
-  deskripsi: String,
-  kategori: String,
+  idBuku: ObjectId,
+  pengiriman: String,
+  idUser: ObjectId,
   jumlah: Number,
   created_at: {
     type: Date,
     default: new Date().toISOString()
   }
 })
-module.exports = mongoose.model('buku', mongoSchema);
+module.exports = mongoose.model('donasi', mongoSchema);
