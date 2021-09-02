@@ -21,23 +21,24 @@ exports.create = (data) =>
       })
   })
 
-exports.RiwayatDonasi = (id) =>
+exports.RiwayatDonasiDonatur = (id) =>
   new Promise((resolve, reject) => {
-    console.log(ObjectId(id))
     model
-      .aggregate([
-        {
-          $match: { idUser: ObjectId(id) }
-        },
-        {
-          $lookup: {
-            from: "bukus",
-            localField: "idBuku",
-            foreignField: "_id",
-            as: "buku",
-          },
-        },
-      ])
+      .find({idUser : ObjectId(id)})
+      .then((res) => {
+        resolve(requestResponse.commonSuccessWithData(res))
+
+      })
+      .catch((err) => {
+        console.log(err)
+        reject(requestResponse.common_error)
+      })
+  })
+
+  exports.RiwayatDonasiTamanBaca = (id) =>
+  new Promise((resolve, reject) => {
+    model
+      .find({idTamanBaca : ObjectId(id)})
       .then((res) => {
         resolve(requestResponse.commonSuccessWithData(res))
 

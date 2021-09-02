@@ -25,9 +25,19 @@ module.exports = (router) => {
       });
   });
 
-  router.get("/donasi/:id", (req, res) => {
+  router.get("/donasi/listDonasiDonatur/:id", (req, res) => {
     controller
-      .RiwayatDonasi(req.params.id)
+      .RiwayatDonasiDonatur(req.params.id)
+      .then((result) => {
+        res.json(result)
+      }).catch((err) => {
+        res.json(err)
+      })
+  })
+
+  router.get("/donasi/listDonasiTamanBaca/:id", (req, res) => {
+    controller
+      .RiwayatDonasiTamanBaca(req.params.id)
       .then((result) => {
         res.json(result)
       }).catch((err) => {

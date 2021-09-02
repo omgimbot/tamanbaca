@@ -2,10 +2,17 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const ObjectId = mongoose.Types.ObjectId
 const mongoSchema = mongoose.Schema({
-  idBuku: ObjectId,
+  judul: String, 
+  kategori: String, 
+  tamanBaca: String,
   pengiriman: String,
   idUser: ObjectId,
+  idTamanBaca: ObjectId,
   jumlah: Number,
+  status: {
+    type: String,
+    default: "Dikirim"
+  },
   created_at: {
     type: Date,
     default: new Date().toISOString()
