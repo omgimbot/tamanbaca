@@ -2,7 +2,7 @@
 const auth = require("basic-auth")
 const jwt = require("jsonwebtoken")
 const multer = require("multer")
-const controller = require("../controller/donasi_controller")
+const controller = require("../controller/pengaduan_controller")
 var config = require("../config/config.json")
 const fs = require("fs")
 const uploadUtil = require("../config/uploadImg")
@@ -13,7 +13,7 @@ module.exports = (router) => {
 
 
 
-  router.post("/donasi/create", (req, res) => {
+  router.post("/pengaduan/create", (req, res) => {
     let data = req.body
     controller
       .create(req.body)
@@ -25,19 +25,9 @@ module.exports = (router) => {
       });
   });
 
-  router.get("/donasi/listDonasiDonatur/:id", (req, res) => {
+  router.get("/pengaduan/:id", (req, res) => {
     controller
-      .RiwayatDonasiDonatur(req.params.id)
-      .then((result) => {
-        res.json(result)
-      }).catch((err) => {
-        res.json(err)
-      })
-  })
-
-  router.get("/donasi/listDonasiTamanBaca/:id", (req, res) => {
-    controller
-      .RiwayatDonasiTamanBaca(req.params.id)
+      .getPengaduan(req.params.id)
       .then((result) => {
         res.json(result)
       }).catch((err) => {
@@ -55,10 +45,10 @@ module.exports = (router) => {
       })
   })
 
-  router.put("/donasi/update/:id", (req, res) => {
+  router.put("/buku/update/:id", (req, res) => {
     console.log(req.body)
     controller
-      .updateDonasi(req.params.id , req.body)
+      .updateBuku(req.params.id , req.body)
       .then((result) => {
         res.json(result)
       }).catch((err) => {

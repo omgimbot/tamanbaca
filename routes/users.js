@@ -81,6 +81,16 @@ module.exports = (router) => {
       })
   })
 
+  router.get("/tamanBaca", (req, res) => {
+    userController
+      .getTamanBaca()
+      .then((result) => {
+        res.json(result)
+      }).catch((err) => {
+        res.json(err)
+      })
+  })
+
   // router.post("/users/checkToken", (req, res) => {
   //   const email = req.body.email;
   //   const token = req.headers["x-access-token"];

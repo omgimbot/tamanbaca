@@ -1,17 +1,16 @@
 const user = require("../model/user_model")
-const model = require("../model/donasi")
+const model = require("../model/pengaduan_model")
 const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
 const config = require("../config/config.json")
 const { requestResponse } = require("../setup")
 const mongoose = require("mongoose")
 const ObjectId = mongoose.Types.ObjectId
-const ObjectID = require('mongodb').ObjectID;
 
 exports.create = (data) =>
   new Promise((resolve, reject) => {
     let newData = new model(data)
-    console.log(data)
+    console.log(newData)
     newData.save()
       .then(() => {
         resolve(requestResponse.common_success)
@@ -21,35 +20,21 @@ exports.create = (data) =>
       })
   })
 
-exports.RiwayatDonasiDonatur = (id) =>
+exports.getPengaduan = (id) =>
   new Promise((resolve, reject) => {
     model
       .find({idUser : ObjectId(id)})
       .then((res) => {
-        resolve(requestResponse.commonSuccessWithData(res))
-
+          console.log(res[0])
+          resolve(requestResponse.commonSuccessWithData(res))
+        
       })
-      .catch((err) => {
-        console.log(err)
+      .catch(() => {
         reject(requestResponse.common_error)
       })
   })
 
-  exports.RiwayatDonasiTamanBaca = (id) =>
-  new Promise((resolve, reject) => {
-    model
-      .find({idTamanBaca : ObjectId(id)})
-      .then((res) => {
-        resolve(requestResponse.commonSuccessWithData(res))
-
-      })
-      .catch((err) => {
-        console.log(err)
-        reject(requestResponse.common_error)
-      })
-  })
-
-exports.updateDonasi = (id, data) =>
+exports.updateBuku = (id, data) =>
   new Promise((resolve, reject) => {
     model
       .updateOne(
@@ -63,7 +48,7 @@ exports.updateDonasi = (id, data) =>
       })
   })
 
-exports.deleteBuku = (id) =>
+  exports.deleteBuku = (id) =>
   new Promise((resolve, reject) => {
     try {
       model

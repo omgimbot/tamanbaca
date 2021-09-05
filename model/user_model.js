@@ -6,6 +6,7 @@ const mongoSchema = mongoose.Schema({
 	email: String,
 	password: String,
 	role:  String,
+	alamat : String ,
 	created_at: {
 		type: Date,
 		default: new Date().toISOString()

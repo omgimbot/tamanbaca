@@ -85,6 +85,20 @@ exports.getProfile = (email) =>
       );
   });
 
+  exports.getTamanBaca = () =>
+  new Promise((resolve, reject) => {
+    user
+      .find({ role: "TamanBaca" })
+      .then((users) => {
+        resolve(requestResponse.commonSuccessWithData(users))
+      })
+      .catch((err) => {
+        console.log(err)
+        reject(requestResponse.common_error)
+      }
+      );
+  });
+
 exports.updateProfile = (id, data) =>
   new Promise((resolve, reject) => {
     try {
