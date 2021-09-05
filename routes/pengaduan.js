@@ -35,6 +35,36 @@ module.exports = (router) => {
       })
   })
 
+  router.get("/admin/pengaduan", (req, res) => {
+    controller
+      .getAllPengaduan()
+      .then((result) => {
+        res.json(result)
+      }).catch((err) => {
+        res.json(err)
+      })
+  })
+
+  router.put("/pengaduan/konfirmasi/:id", (req, res) => {
+    controller
+      .konfirmasi(req.params.id, req.body)
+      .then((result) => {
+        res.json(result)
+      }).catch((err) => {
+        res.json(err)
+      })
+  })
+
+  router.delete("/admin/pengaduan/:id", (req, res) => {
+    controller
+      .deletePengaduan(req.params.id)
+      .then((result) => {
+        res.json(result)
+      }).catch((err) => {
+        res.json(err)
+      })
+  })
+
   router.delete("/buku/delete/:id", (req, res) => {
     controller
       .deleteBuku(req.params.id)
@@ -48,14 +78,14 @@ module.exports = (router) => {
   router.put("/buku/update/:id", (req, res) => {
     console.log(req.body)
     controller
-      .updateBuku(req.params.id , req.body)
+      .updateBuku(req.params.id, req.body)
       .then((result) => {
         res.json(result)
       }).catch((err) => {
         res.json(err)
       })
   })
-  
+
 
   router.post("/users/signin", (req, res) => {
     try {

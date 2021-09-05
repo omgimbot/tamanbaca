@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 const moment = require('moment');
 const ObjectId = mongoose.Types.ObjectId
 const mongoSchema = mongoose.Schema({
-  idUser : ObjectId , 
+  idUser: ObjectId,
   judul: String,
   deskripsi: String,
   status: {
     type: String,
     default: "Menunggu Konfirmasi"
-  } ,
+  },
   created_at: {
     type: Date,
     default: new Date().toISOString()

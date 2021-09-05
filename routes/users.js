@@ -91,6 +91,26 @@ module.exports = (router) => {
       })
   })
 
+  router.get("/donatur", (req, res) => {
+    userController
+      .getDonatur()
+      .then((result) => {
+        res.json(result)
+      }).catch((err) => {
+        res.json(err)
+      })
+  })
+
+  router.delete("/deleteuser/:id", (req, res) => {
+    userController
+      .deleteUser(req.params.id)
+      .then((result) => {
+        res.json(result)
+      }).catch((err) => {
+        res.json(err)
+      })
+  })
+
   // router.post("/users/checkToken", (req, res) => {
   //   const email = req.body.email;
   //   const token = req.headers["x-access-token"];

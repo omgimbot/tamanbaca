@@ -85,12 +85,40 @@ exports.getProfile = (email) =>
       );
   });
 
-  exports.getTamanBaca = () =>
+exports.getTamanBaca = () =>
   new Promise((resolve, reject) => {
     user
       .find({ role: "TamanBaca" })
       .then((users) => {
         resolve(requestResponse.commonSuccessWithData(users))
+      })
+      .catch((err) => {
+        console.log(err)
+        reject(requestResponse.common_error)
+      }
+      );
+  });
+
+exports.getDonatur = () =>
+  new Promise((resolve, reject) => {
+    user
+      .find({ role: "Donatur" })
+      .then((users) => {
+        resolve(requestResponse.commonSuccessWithData(users))
+      })
+      .catch((err) => {
+        console.log(err)
+        reject(requestResponse.common_error)
+      }
+      );
+  });
+
+exports.deleteUser = (id) =>
+  new Promise((resolve, reject) => {
+    user
+      .deleteOne({ _id: ObjectId(id) })
+      .then((users) => {
+        resolve(requestResponse.common_success)
       })
       .catch((err) => {
         console.log(err)
